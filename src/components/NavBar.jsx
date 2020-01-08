@@ -6,8 +6,12 @@ const NavBar = () => {
     <>
       <div>
         <nav className="navigation">
-          <Link to="/">Suncoast Overflow</Link>
-          <Link to="/createquestion">Add A Question</Link>
+          <Link className="nav" to="/">
+            Suncoast Overflow
+          </Link>
+          <Link className="nav" to="/createquestion">
+            Add A Question
+          </Link>
         </nav>
       </div>
     </>
