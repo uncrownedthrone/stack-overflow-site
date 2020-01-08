@@ -1,8 +1,8 @@
 import React from 'react'
-import HelloWorld from '../components/HelloWorld'
+import NavBar from '../components/NavBar'
 
 const HomePage = () => {
-  return <HelloWorld />
+  return <NavBar />
 }
 
 export default HomePage
