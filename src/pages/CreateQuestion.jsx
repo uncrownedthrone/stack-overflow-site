@@ -13,38 +13,20 @@ const CreateQuestion = () => {
         content: content,
       }
     )
-    const updateTitle = e => {
-      setTitle(e.target.value)
-    }
-
-    const updateContent = e => {
-      setContent(e.target.value)
-    }
-
-    useEffect(() => {
-      addNewQuestion()
-    }, [])
-
-    return (
-      <main>
-        <form onSubmit={addQuestion}>
-          <input
-            placeholder="Title"
-            required
-            type="text"
-            onChange={updateTitle}
-          />
-          <input
-            placeholder="Content"
-            required
-            type="text"
-            onChange={updateContent}
-          />
-          <button>Submit</button>
-        </form>
-      </main>
-    )
   }
+  useEffect(() => {
+    addNewQuestion()
+  }, [])
+
+  return (
+    <main>
+      <form onSubmit={addNewQuestion}>
+        <input placeholder="Title" required type="text" />
+        <input placeholder="Content" required type="text" />
+        <button>Submit</button>
+      </form>
+    </main>
+  )
 }
 
 export default CreateQuestion
