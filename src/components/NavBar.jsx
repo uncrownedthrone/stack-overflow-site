@@ -20,7 +20,7 @@ const NavBar = () => {
             />
           </Link>
 
-          <Link to="/home">Go Home</Link>
+          <Link to="/">Go Home</Link>
         </nav>
       </div>
     </>
