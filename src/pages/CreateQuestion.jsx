@@ -1,79 +1,76 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 
 const CreateQuestion = () => {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
+  const [question, setQuestion] = useState({
+    content: '',
+    description: '',
+  })
+  const [questionId, setQuestionId] = useState()
+  const [
+    wasQuestionCreatedSuccessfully,
+    setWasQuestionCreatedSuccessfully,
+  ] = useState(false)
 
-  const addQuestion = async e => {
-    await axios.post(`https://localhost:5001/api/Question/CreateQuestion`, {
-      shortDescription: title,
-      content: content,
+  const updateQuestionObject = e => {
+    e.persist()
+    setQuestion(prevQuestion => {
+      return {
+        ...prevQuestion,
+        [e.target.name]: e.target.value,
+      }
     })
   }
 
-  const updateTitle = e => {
-    setTitle(e.target.value)
+  const submitQuestion = async e => {
+    e.preventDefault()
+    const isValid = Object.keys(question).reduce((acc, key) => {
+      return acc && question[key] !== ''
+    }, true)
+
+    if (isValid) {
+      const resp = await axios.post(
+        'https://localhost:5001/api/Question/CreateQuestion',
+        {
+          ...question,
+        }
+      )
+      if (resp.status === 200) {
+        setQuestionId(resp.data.id)
+      }
+    }
   }
 
-  const updateContent = e => {
-    setContent(e.target.value)
-  }
+  useEffect(() => {
+    if (questionId) {
+      setWasQuestionCreatedSuccessfully(true)
+    }
+  }, [questionId])
 
-  return (
-    <main>
-      <form onSubmit={addQuestion}>
+  return wasQuestionCreatedSuccessfully ? (
+    <Redirect to={`/question/${questionId}`} />
+  ) : (
+    <div>
+      <form onSubmit={submitQuestion}>
         <input
-          placeholder="Title"
-          required
           type="text"
-          onChange={updateTitle}
+          placeholder="Question Title"
+          value={question.content}
+          name="content"
+          onChange={updateQuestionObject}
         />
         <input
-          placeholder="Content"
-          required
           type="text"
-          onChange={updateContent}
+          placeholder="Question Description"
+          value={question.description}
+          name="description"
+          onChange={updateQuestionObject}
         />
-        <button>Submit</button>
+        <button>CREATE QUESTION</button>
       </form>
-    </main>
+    </div>
   )
 }
+
 export default CreateQuestion
-
-// import axios from 'axios'
-
-// const CreateQuestion = () => {
-//   const [question, setQuestion] = useState([])
-//   const [title, setTitle] = useState('')
-//   const [content, setContent] = useState('')
-
-//   const addNewQuestion = async e => {
-//     const resp = await axios.post(
-//       `https://localhost:5001/api/Question/CreateQuestion`,
-//       {
-//         shortDescription: title,
-//         content: content,
-//       }
-//     )
-//     setQuestion(resp.data)
-//   }
-//   useEffect(() => {
-//     addNewQuestion()
-//   }, [])
-
-//   return (
-//     <h2>New Question</h2>
-//     <section>
-//     {questions.map(question => {
-//       return (
-//         <>
-//         <p>{questions.</p>
-//         </>
-//       )
-//     })}
-//     </section>
-//   )
-// }
-// }
