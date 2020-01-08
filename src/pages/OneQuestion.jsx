@@ -1,7 +1,7 @@
 import React from 'react'
 
 const OneQuestion = () => {
-  const [question, setQuestion] = useState({})
+  const [question, setQuestion] = useState([])
   const [answers, setAnswers] = useState([])
 
   const getQuestion = async () => {
@@ -9,9 +9,9 @@ const OneQuestion = () => {
       .get(
         `https://localhost:5001/api/Question/question/${props.match.params.id}`
       )
-      .then(res => {
-        console.log(res.data[0])
-        setQuestion(res.data[0])
+      .then(resp => {
+        console.log(resp.data[0])
+        setQuestion(resp.data[0])
       })
   }
 
@@ -20,9 +20,9 @@ const OneQuestion = () => {
       .get(
         `https://localhost:5001/api/Question/AllAnswersJoin/${props.match.params.id}`
       )
-      .then(res => {
-        console.log(res)
-        setAnswers(res.data)
+      .then(resp => {
+        console.log(resp)
+        setAnswers(resp.data)
       })
   }
 
@@ -32,26 +32,23 @@ const OneQuestion = () => {
   }, [])
 
   return (
-    <main className="card m-sm-1">
-      <div className="card-body">
-        <h1 className="card-title">Title: {question.shortDescription}</h1>
-        <p className="card-text">Content: {question.content}</p>
+    <main>
+      <div>
+        <h1>Title: {question.shortDesc}</h1>
+        <p>Content: {question.content}</p>
 
-        <p className="card-text">Date Created: {question.dateOfPost}</p>
-        <p className="card-text">
-          Praise: {question.praisesForMyQuestionRelevance}
-        </p>
-      </div>
-      <div className="things"></div>
+        <p>Date Created: {question.dateOfPost}</p>
+        <p>Votes: {question.UpDownVoteQuestion}</p>
+      </p>
+      <div></div>
 
-      {answers.map((item, i) => {
+      {answers.map((a, i) => {
         return (
-          <li className="card m-sm-1" key={i}>
+          <li key={i}>
             <Answer
-              className="card-body"
-              content={item.answerContent}
-              date={item.dateOfPost}
-              praise={item.praisesForMyAnswer}
+              content={a.answerContent}
+              date={a.dateOfPost}
+              praise={a.UpDownVoteAnswer}
             />
           </li>
         )
