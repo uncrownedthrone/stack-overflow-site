@@ -6,21 +6,8 @@ const NavBar = () => {
     <>
       <div>
         <nav className="navigation">
-          <h2 className="title">Suncoast Overflow</h2>
-          <ul>
-            <li>Products</li>
-            <li>Customers</li>
-            <li>Case Studies</li>
-          </ul>
-          <Link to="/createquestion">
-            <input
-              className="btn-question"
-              type="button"
-              value="Got Question?"
-            />
-          </Link>
-
-          <Link to="/">Go Home</Link>
+          <Link to="/">Suncoast Overflow</Link>
+          <Link to="/createquestion">Add A Question</Link>
         </nav>
       </div>
     </>
