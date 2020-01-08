@@ -2,23 +2,17 @@ import React from 'react'
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import NotFound from './pages/NotFound'
+import CreateQuestion from './pages/CreateQuestion'
+import NavBar from './components/NavBar'
 
 const App = () => {
   return (
     <Router>
-      <header>
-        <h1>Welcome to my SPA</h1>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Go Home</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <NavBar />
       <Switch>
         <Route exact path="/" component={HomePage}></Route>
         <Route path="*" component={NotFound}></Route>
+        <Route exact path="/createquestion" component={CreateQuestion}></Route>
       </Switch>
     </Router>
   )
