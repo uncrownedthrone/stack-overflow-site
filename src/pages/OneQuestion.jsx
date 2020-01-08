@@ -20,7 +20,7 @@ const OneQuestion = () => {
         `https://localhost:5001/api/Question/AllAnswersJoin/${props.match.params.id}`
       )
       .then(resp => {
-        setAnswers(reps.data)
+        setAnswers(resp.data)
       })
   }
 
