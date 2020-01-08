@@ -8,6 +8,7 @@ import NavBar from './components/NavBar'
 const App = () => {
   return (
     <Router>
+      <NavBar />
       <Switch>
         <Route exact path="/" component={HomePage}></Route>
         <Route path="*" component={NotFound}></Route>
