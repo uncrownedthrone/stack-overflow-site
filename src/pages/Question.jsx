@@ -9,7 +9,7 @@ const Question = () => {
           <p>{props.shortDesc}</p>
           <p>{props.date}</p>
           <div>
-            <span>Upvotes: {props.praise}</span>
+            <span>Upvotes: {props.vote}</span>
           </div>
         </li>
       </ul>
