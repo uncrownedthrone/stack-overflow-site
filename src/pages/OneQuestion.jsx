@@ -10,7 +10,6 @@ const OneQuestion = () => {
         `https://localhost:5001/api/Question/question/${props.match.params.id}`
       )
       .then(resp => {
-        console.log(resp.data[0])
         setQuestion(resp.data[0])
       })
   }
@@ -21,8 +20,7 @@ const OneQuestion = () => {
         `https://localhost:5001/api/Question/AllAnswersJoin/${props.match.params.id}`
       )
       .then(resp => {
-        console.log(resp)
-        setAnswers(resp.data)
+        setAnswers(reps.data)
       })
   }
 
@@ -39,8 +37,7 @@ const OneQuestion = () => {
 
         <p>Date Created: {question.dateOfPost}</p>
         <p>Votes: {question.UpDownVoteQuestion}</p>
-      </p>
-      <div></div>
+      </div>
 
       {answers.map((a, i) => {
         return (
