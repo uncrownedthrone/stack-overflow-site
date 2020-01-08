@@ -59,7 +59,5 @@ const OneQuestion = () => {
     </main>
   )
 }
-  return <div>THIS IS THE ONE QUESTION PAGE</div>
-}
 
 export default OneQuestion
