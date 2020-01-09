@@ -41,8 +41,9 @@ const OneQuestion = props => {
         <li>
           <Answer
             content={answers.answerContent}
-            date={answers.dateOfPost}
-            praise={answers.UpDownVoteAnswer}
+            dateOfPost={answers.dateOfPost}
+            upDownVoteAnswer={answers.upDownVoteAnswer}
+            questionPostId={props.questionPostId}
           />
         </li>
       </ul>

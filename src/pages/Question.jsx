@@ -5,11 +5,11 @@ const Question = props => {
     <div>
       <ul>
         <li>
-          <h3>{props.description}</h3>
-          <p>{props.content}</p>
-          <p>{props.dateOfPost}</p>
+          <h3>Question Title:  {props.description}</h3>
+          <p>Question Content:  {props.content}</p>
+          <p>Date Question Created: {props.dateOfPost}</p>
           <div>
-            <span>Upvotes: {props.upDownVoteQuestion}</span>
+            <span>Question Votes: {props.upDownVoteQuestion}</span>
           </div>
         </li>
       </ul>
