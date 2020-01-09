@@ -31,7 +31,7 @@ const OneQuestion = props => {
     <main>
       <div>
         <Question
-          shortDesc={question.desciption}
+          description={question.description}
           content={question.content}
           dateOfPost={question.dateOfPost}
           upDownVoteQuestion={question.UpDownVoteQuestion}

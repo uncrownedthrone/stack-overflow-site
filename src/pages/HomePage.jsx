@@ -19,17 +19,17 @@ const HomePage = () => {
   return (
     <div>
       <ul className="1">
-        {data.map((e, i) => {
+        {data.map((question, i) => {
           return (
             <div className="2" key={i}>
               <div className="3">
-                <Link className="4" to={`/question/${e.id}`}>
+                <Link className="4" to={`/question/${question.id}`}>
                   <Question
                     className="5"
-                    title={e.description}
-                    shortDesc={e.content}
-                    vote={e.upDownVoteQuestion}
-                    date={e.dateOfPost}
+                    description={question.description}
+                    content={question.content}
+                    dateOfPost={question.dateOfPost}
+                    upDownVoteQuestion={question.UpDownVoteQuestion}
                   />
                 </Link>
               </div>
