@@ -7,7 +7,7 @@ const Answer = props => {
         <p>Answer Content: {props.answerContent}</p>
         <p>Date Answer Created: {props.dateOfPost}</p>
         <p>Answer Votes: {props.upDownVoteAnswer}</p>
-        {props.questionPostId}
+        <p>Question Id:</p> {props.questionPostId}
       </div>
     </>
   )
