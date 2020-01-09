@@ -5,9 +5,9 @@ const Question = props => {
     <div>
       <ul>
         <li>
-          <h3>Title: {props.description}</h3>
-          <p>Content: {props.content}</p>
-          <p>Date: {props.dateOfPost}</p>
+          <h3>{props.description}</h3>
+          <p>{props.content}</p>
+          <p>{props.dateOfPost}</p>
           <div>
             <span>Upvotes: {props.upDownVoteQuestion}</span>
           </div>
