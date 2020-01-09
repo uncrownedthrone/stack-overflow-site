@@ -5,8 +5,8 @@ const Question = props => {
     <div>
       <ul>
         <li>
-          <h3>Question Title:  {props.description}</h3>
-          <p>Question Content:  {props.content}</p>
+          <h3>Question Title: {props.description}</h3>
+          <p>Question Content: {props.content}</p>
           <p>Date Question Created: {props.dateOfPost}</p>
           <div>
             <span>Question Votes: {props.upDownVoteQuestion}</span>

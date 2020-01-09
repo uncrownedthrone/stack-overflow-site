@@ -7,6 +7,7 @@ const OneQuestion = props => {
   const [question, setQuestion] = useState({})
   const [answers, setAnswers] = useState([])
   const [newAnswer, setNewAnswer] = useState('')
+  const [votes, setVotes] = useState(0)
 
   const getQuestion = async () => {
     const resp = await axios.get(
@@ -39,9 +40,51 @@ const OneQuestion = props => {
         {
           answerContent: newAnswer,
           questionPostId: question.id,
+          upDownVoteAnswer: votes,
+          upDownVoteQuestion: votes,
         }
       )
+      console.log(resp)
     }
+  }
+
+  const upVoteQuestion = async () => {
+    const resp = await axios.put(
+      `https://localhost:5001/api/Question/upvote/${props.match.params.id}`
+    )
+    setQuestion(question => {
+      return {
+        ...question,
+        upDownVoteQuestion: question.upDownVoteQuestion + 1,
+      }
+    })
+  }
+
+  const downVoteQuestion = () => {
+    setQuestion(question => {
+      return {
+        ...question,
+        upDownVoteQuestion: question.upDownVoteQuestion - 1,
+      }
+    })
+  }
+
+  const upVoteAnswer = () => {
+    setAnswers(answers => {
+      return {
+        ...answers,
+        upDownVoteAnswer: answers.upDownVoteAnswer + 1,
+      }
+    })
+  }
+
+  const downVoteAnswer = () => {
+    setAnswers(answers => {
+      return {
+        ...answers,
+        upDownVoteAnswer: answers.upDownVoteAnswer - 1,
+      }
+    })
   }
 
   useEffect(() => {
@@ -56,8 +99,10 @@ const OneQuestion = props => {
           content={question.content}
           description={question.description}
           dateOfPost={question.dateOfPost}
-          upDownVoteQuestion={question.UpDownVoteQuestion}
+          upDownVoteQuestion={question.upDownVoteQuestion}
         />
+        <button onClick={upVoteQuestion}>Upvote</button>
+        <button onClick={downVoteQuestion}>Downvote</button>
       </div>
       <ul>
         {answers.map((answers, i) => {
@@ -73,6 +118,10 @@ const OneQuestion = props => {
         })}
       </ul>
 
+      <section>
+        <button onClick={upVoteAnswer}>Upvote</button>
+        <button onClick={downVoteAnswer}>Downvote</button>
+      </section>
       <form onSubmit={submitAnswer}>
         <input
           type="text"
