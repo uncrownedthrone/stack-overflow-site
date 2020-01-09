@@ -1,29 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import Question from './Question'
 import Answer from '../components/Answer'
 
-const OneQuestion = () => {
+const OneQuestion = props => {
   const [question, setQuestion] = useState([])
   const [answers, setAnswers] = useState([])
 
-  const getQuestion = async props => {
-    await axios
-      .get(
-        `https://localhost:5001/api/Question/question/${props.match.params.id}`
-      )
-      .then(resp => {
-        setQuestion(resp.data[0])
-      })
+  const getQuestion = async () => {
+    const resp = await axios.get(
+      `https://localhost:5001/api/Question/${props.match.params.id}`
+    )
+    setQuestion(resp.data)
+    console.log(resp.data)
   }
 
-  const getAnswers = async props => {
-    await axios
-      .get(
-        `https://localhost:5001/api/Question/AllAnswersJoin/${props.match.params.id}`
-      )
-      .then(resp => {
-        setAnswers(resp.data)
-      })
+  const getAnswers = async () => {
+    const resp = await axios.get(
+      `https://localhost:5001/api/Question/AllAnswersJoin/${props.match.params.id}`
+    )
+    setAnswers(resp.data)
   }
 
   useEffect(() => {
@@ -34,11 +30,12 @@ const OneQuestion = () => {
   return (
     <main>
       <div>
-        <h1>Title: {question.shortDesc}</h1>
-        <p>Content: {question.content}</p>
-
-        <p>Date Created: {question.dateOfPost}</p>
-        <p>Votes: {question.UpDownVoteQuestion}</p>
+        <Question
+          shortDesc={question.desciption}
+          content={question.content}
+          dateOfPost={question.dateOfPost}
+          upDownVoteQuestion={question.UpDownVoteQuestion}
+        />
       </div>
       <ul>
         {answers.map((a, i) => {

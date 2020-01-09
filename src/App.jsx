@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage'
 import NotFound from './pages/NotFound'
 import CreateQuestion from './pages/CreateQuestion'
 import Question from './pages/Question'
-import OneQuesiton from './pages/OneQuestion'
+import OneQuestion from './pages/OneQuestion'
 import NavBar from './components/NavBar'
 
 const App = () => {
@@ -13,6 +13,7 @@ const App = () => {
       <NavBar />
       <Switch>
         <Route exact path="/" component={HomePage}></Route>
+        <Route exact path="/question/:id" component={OneQuestion}></Route>
         <Route exact path="/createquestion" component={CreateQuestion}></Route>
         <Route path="*" component={NotFound}></Route>
       </Switch>

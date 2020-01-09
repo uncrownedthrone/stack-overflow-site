@@ -55,14 +55,14 @@ const CreateQuestion = () => {
       <form onSubmit={submitQuestion}>
         <input
           type="text"
-          placeholder="Question Title"
+          placeholder="Question Topic"
           value={question.content}
           name="content"
           onChange={updateQuestionObject}
         />
         <input
           type="text"
-          placeholder="Question Description"
+          placeholder="What is your question?"
           value={question.description}
           name="description"
           onChange={updateQuestionObject}
