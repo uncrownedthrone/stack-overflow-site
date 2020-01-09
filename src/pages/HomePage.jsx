@@ -3,13 +3,21 @@ import Question from './Question'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
+
 const HomePage = () => {
   const [data, setData] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const getData = () => {
-    axios.get('https://localhost:5001/api/Question/').then(resp => {
-      setData(resp.data)
-    })
+  const getData = async () => {
+    const resp = await axios.get('https://localhost:5001/api/Question/')
+    setData(resp.data)
+  }
+
+  const getSearchResults = async () => {
+    const resp = await axios.get(
+      'https://localhost:5001/api/Question/searchterm/' + searchTerm
+    )
+    console.log(searchTerm)
   }
 
   useEffect(() => {
@@ -18,6 +26,14 @@ const HomePage = () => {
 
   return (
     <div>
+      <input
+        type="search"
+        placeholder="Search Questions"
+        value={searchTerm}
+        name="description"
+        onChange={e => setSearchTerm(e.target.value)}
+      ></input>
+      <button onClick={getSearchResults}>Getting Question</button>
       <ul className="1">
         {data.map((question, i) => {
           return (
