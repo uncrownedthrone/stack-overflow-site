@@ -56,14 +56,14 @@ const CreateQuestion = () => {
         <input
           type="text"
           placeholder="Question Topic"
-          value={question.content}
+          value={question.description}
           name="content"
           onChange={updateQuestionObject}
         />
         <input
           type="text"
           placeholder="What is your question?"
-          value={question.description}
+          value={question.content}
           name="description"
           onChange={updateQuestionObject}
         />

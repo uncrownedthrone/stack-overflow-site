@@ -31,24 +31,20 @@ const OneQuestion = props => {
     <main>
       <div>
         <Question
-          description={question.description}
           content={question.content}
+          description={question.description}
           dateOfPost={question.dateOfPost}
           upDownVoteQuestion={question.UpDownVoteQuestion}
         />
       </div>
       <ul>
-        {answers.map((a, i) => {
-          return (
-            <li key={i}>
-              <Answer
-                content={a.answerContent}
-                date={a.dateOfPost}
-                praise={a.UpDownVoteAnswer}
-              />
-            </li>
-          )
-        })}
+        <li>
+          <Answer
+            content={answers.answerContent}
+            date={answers.dateOfPost}
+            praise={answers.UpDownVoteAnswer}
+          />
+        </li>
       </ul>
     </main>
   )
