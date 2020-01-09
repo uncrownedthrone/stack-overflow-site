@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import NotFound from './pages/NotFound'
 import CreateQuestion from './pages/CreateQuestion'
+import Question from './pages/Question'
+import OneQuesiton from './pages/OneQuestion'
 import NavBar from './components/NavBar'
 
 const App = () => {
