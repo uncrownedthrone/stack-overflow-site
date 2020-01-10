@@ -7,7 +7,10 @@ const OneQuestion = props => {
   const [question, setQuestion] = useState({})
   const [answers, setAnswers] = useState([])
   const [newAnswer, setNewAnswer] = useState('')
-  const [votes, setVotes] = useState(0)
+  const [upVoteAnswer, setUpVoteAnswer] = useState(0)
+  const [downVoteAnswer, setDownVoteAnswer] = useState(0)
+  const [upVoteQuestion, setUpVoteQuestion] = useState(0)
+  const [downVoteQuestion, setDownVoteQuestion] = useState(0)
 
   const getQuestion = async () => {
     const resp = await axios.get(
@@ -40,21 +43,17 @@ const OneQuestion = props => {
         {
           answerContent: newAnswer,
           questionPostId: question.id,
-          upVoteAnswer: votes,
-          downVoteAnswer: votes,
-          upVoteQuestion: votes,
-          downVoteQuestion: votes,
         }
       )
       console.log(resp)
     }
   }
 
-  const upVoteQuestion = async () => {
+  const clickUpVoteQuestion = async () => {
     const resp = await axios.put(
       `https://localhost:5001/api/Question/upvote/${props.match.params.id}`
     )
-    setQuestion(question => {
+    setUpVoteQuestion(question => {
       return {
         ...question,
         upVoteQuestion: question.upVoteQuestion + 1,
@@ -62,8 +61,8 @@ const OneQuestion = props => {
     })
   }
 
-  const downVoteQuestion = () => {
-    setQuestion(question => {
+  const clickDownVoteQuestion = () => {
+    setDownVoteQuestion(question => {
       return {
         ...question,
         downVoteQuestion: question.downVoteQuestion - 1,
@@ -71,8 +70,8 @@ const OneQuestion = props => {
     })
   }
 
-  const upVoteAnswer = () => {
-    setAnswers(answers => {
+  const clickUpVoteAnswer = () => {
+    setUpVoteAnswer(answers => {
       return {
         ...answers,
         upVoteAnswer: answers.upVoteAnswer + 1,
@@ -80,8 +79,8 @@ const OneQuestion = props => {
     })
   }
 
-  const downVoteAnswer = () => {
-    setAnswers(answers => {
+  const clickDownVoteAnswer = () => {
+    setDownVoteAnswer(answers => {
       return {
         ...answers,
         downVoteAnswer: answers.downVoteAnswer - 1,
@@ -104,8 +103,8 @@ const OneQuestion = props => {
           upVoteQuestion={question.upVoteQuestion}
           downVoteQuestion={question.downVoteQuestion}
         />
-        <button onClick={upVoteQuestion}>Upvote</button>
-        <button onClick={downVoteQuestion}>Downvote</button>
+        <button onClick={clickUpVoteQuestion}>Upvote</button>
+        <button onClick={clickDownVoteQuestion}>Downvote</button>
       </div>
       <ul>
         {answers.map((answers, i) => {
@@ -114,7 +113,8 @@ const OneQuestion = props => {
               <Answer
                 answerContent={answers.answerContent}
                 dateOfPost={answers.dateOfPost}
-                upDownVoteAnswer={answers.upDownVoteAnswer}
+                upVoteAnswer={answers.upVoteAnswer}
+                downVoteAnswer={answers.downVoteAnswer}
               />
             </li>
           )
@@ -122,8 +122,8 @@ const OneQuestion = props => {
       </ul>
 
       <section>
-        <button onClick={upVoteAnswer}>Upvote</button>
-        <button onClick={downVoteAnswer}>Downvote</button>
+        <button onClick={clickUpVoteAnswer}>Upvote</button>
+        <button onClick={clickDownVoteAnswer}>Downvote</button>
       </section>
       <form onSubmit={submitAnswer}>
         <input
