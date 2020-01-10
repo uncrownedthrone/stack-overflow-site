@@ -8,7 +8,7 @@ const Answer = props => {
         <p>Date Answer Created: {props.dateOfPost}</p>
         <div>
           <span>Up Votes: {props.upVoteAnswer}</span>
-          <span>Down Votes: {props.downVoteAnswer}</span>
+          <span>Down Votes: -{props.downVoteAnswer}</span>
         </div>
       </div>
     </>

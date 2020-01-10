@@ -13,7 +13,6 @@ const OneQuestion = props => {
       `https://localhost:5001/api/Question/${props.match.params.id}`
     )
     setQuestion(resp.data)
-    console.log(resp.data)
   }
 
   const getAnswers = async () => {
@@ -74,7 +73,6 @@ const OneQuestion = props => {
   }
 
   const clickUpVoteAnswer = async e => {
-    e.persist()
     const resp = await axios.put(
       `https://localhost:5001/api/Answers/upvote/${e.currentTarget.value}`
     )
@@ -89,7 +87,6 @@ const OneQuestion = props => {
   }
 
   const clickDownVoteAnswer = async e => {
-    e.persist()
     const resp = await axios.put(
       `https://localhost:5001/api/Answers/downvote/${e.currentTarget.value}`
     )
@@ -104,13 +101,9 @@ const OneQuestion = props => {
   }
 
   useEffect(() => {
-    console.dir(answers)
-  }, [answers])
-
-  useEffect(() => {
     getQuestion()
     getAnswers()
-  }, [])
+  }, [answers])
 
   return (
     <main>
