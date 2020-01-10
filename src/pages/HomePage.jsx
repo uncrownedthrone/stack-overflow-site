@@ -16,6 +16,7 @@ const HomePage = () => {
     const resp = await axios.get(
       'https://localhost:5001/api/Question/searchterm/' + searchTerm
     )
+    setData(resp.data)
     console.log(searchTerm)
   }
 
@@ -33,6 +34,7 @@ const HomePage = () => {
         onChange={e => setSearchTerm(e.target.value)}
       ></input>
       <button onClick={getSearchResults}>Getting Question</button>
+      <button onClick={getData}>Clear Question</button>
       <ul className="1">
         {data.map((question, i) => {
           return (
