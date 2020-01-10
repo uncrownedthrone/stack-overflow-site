@@ -7,10 +7,6 @@ const OneQuestion = props => {
   const [question, setQuestion] = useState({})
   const [answers, setAnswers] = useState([])
   const [newAnswer, setNewAnswer] = useState('')
-  const [upVoteAnswer, setUpVoteAnswer] = useState(0)
-  const [downVoteAnswer, setDownVoteAnswer] = useState(0)
-  const [upVoteQuestion, setUpVoteQuestion] = useState(0)
-  const [downVoteQuestion, setDownVoteQuestion] = useState(0)
 
   const getQuestion = async () => {
     const resp = await axios.get(
@@ -53,40 +49,63 @@ const OneQuestion = props => {
     const resp = await axios.put(
       `https://localhost:5001/api/Question/upvote/${props.match.params.id}`
     )
-    setUpVoteQuestion(question => {
-      return {
-        ...question,
-        upVoteQuestion: question.upVoteQuestion + 1,
-      }
-    })
+    if (resp.status === 200) {
+      setQuestion(question => {
+        question.upVoteQuestion += 1
+        return {
+          ...question,
+        }
+      })
+    }
   }
 
-  const clickDownVoteQuestion = () => {
-    setDownVoteQuestion(question => {
-      return {
-        ...question,
-        downVoteQuestion: question.downVoteQuestion - 1,
-      }
-    })
+  const clickDownVoteQuestion = async () => {
+    const resp = await axios.put(
+      `https://localhost:5001/api/Question/downvote/${props.match.params.id}`
+    )
+    if (resp.status === 200) {
+      setQuestion(question => {
+        question.downVoteQuestion -= 1
+        return {
+          ...question,
+        }
+      })
+    }
   }
 
-  const clickUpVoteAnswer = () => {
-    setUpVoteAnswer(answers => {
-      return {
-        ...answers,
-        upVoteAnswer: answers.upVoteAnswer + 1,
-      }
-    })
+  const clickUpVoteAnswer = async e => {
+    e.persist()
+    const resp = await axios.put(
+      `https://localhost:5001/api/Answers/upvote/${e.currentTarget.value}`
+    )
+    if (resp.status === 200) {
+      setAnswers(answers => {
+        answers.upVoteAnswer += 1
+        return {
+          ...answers,
+        }
+      })
+    }
   }
 
-  const clickDownVoteAnswer = () => {
-    setDownVoteAnswer(answers => {
-      return {
-        ...answers,
-        downVoteAnswer: answers.downVoteAnswer - 1,
-      }
-    })
+  const clickDownVoteAnswer = async e => {
+    e.persist()
+    const resp = await axios.put(
+      `https://localhost:5001/api/Answers/downvote/${e.currentTarget.value}`
+    )
+    if (resp.status === 200) {
+      setAnswers(answers => {
+        answers.downVoteAnswer -= 1
+        return {
+          ...answers,
+        }
+      })
+    }
   }
+
+  useEffect(() => {
+    console.dir(answers)
+  }, [answers])
 
   useEffect(() => {
     getQuestion()
@@ -106,25 +125,33 @@ const OneQuestion = props => {
         <button onClick={clickUpVoteQuestion}>Upvote</button>
         <button onClick={clickDownVoteQuestion}>Downvote</button>
       </div>
-      <ul>
-        {answers.map((answers, i) => {
-          return (
-            <li className="answers" key={i}>
-              <Answer
-                answerContent={answers.answerContent}
-                dateOfPost={answers.dateOfPost}
-                upVoteAnswer={answers.upVoteAnswer}
-                downVoteAnswer={answers.downVoteAnswer}
-              />
-            </li>
-          )
-        })}
-      </ul>
 
-      <section>
-        <button onClick={clickUpVoteAnswer}>Upvote</button>
-        <button onClick={clickDownVoteAnswer}>Downvote</button>
-      </section>
+      {answers.length > 0 && (
+        <ul>
+          {answers.map((answers, i) => {
+            return (
+              <>
+                <li className="answers" key={i}>
+                  <Answer
+                    answerContent={answers.answerContent}
+                    dateOfPost={answers.dateOfPost}
+                    upVoteAnswer={answers.upVoteAnswer}
+                    downVoteAnswer={answers.downVoteAnswer}
+                  />
+                </li>
+                <br />
+                <button value={answers.id} onClick={clickUpVoteAnswer}>
+                  Upvote
+                </button>
+                <button value={answers.id} onClick={clickDownVoteAnswer}>
+                  Downvote
+                </button>
+              </>
+            )
+          })}
+        </ul>
+      )}
+
       <form onSubmit={submitAnswer}>
         <input
           type="text"
@@ -133,7 +160,7 @@ const OneQuestion = props => {
           name="content"
           onChange={e => setNewAnswer(e.target.value)}
         />
-        <button onClick={reloadPage}>CREATE ANSWER</button>
+        <button onClick={reloadPage}>SUBMIT ANSWER</button>
       </form>
     </main>
   )
