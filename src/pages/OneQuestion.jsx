@@ -40,8 +40,10 @@ const OneQuestion = props => {
         {
           answerContent: newAnswer,
           questionPostId: question.id,
-          upDownVoteAnswer: votes,
-          upDownVoteQuestion: votes,
+          upVoteAnswer: votes,
+          downVoteAnswer: votes,
+          upVoteQuestion: votes,
+          downVoteQuestion: votes,
         }
       )
       console.log(resp)
@@ -55,7 +57,7 @@ const OneQuestion = props => {
     setQuestion(question => {
       return {
         ...question,
-        upDownVoteQuestion: question.upDownVoteQuestion + 1,
+        upVoteQuestion: question.upVoteQuestion + 1,
       }
     })
   }
@@ -64,7 +66,7 @@ const OneQuestion = props => {
     setQuestion(question => {
       return {
         ...question,
-        upDownVoteQuestion: question.upDownVoteQuestion - 1,
+        downVoteQuestion: question.downVoteQuestion - 1,
       }
     })
   }
@@ -73,7 +75,7 @@ const OneQuestion = props => {
     setAnswers(answers => {
       return {
         ...answers,
-        upDownVoteAnswer: answers.upDownVoteAnswer + 1,
+        upVoteAnswer: answers.upVoteAnswer + 1,
       }
     })
   }
@@ -82,7 +84,7 @@ const OneQuestion = props => {
     setAnswers(answers => {
       return {
         ...answers,
-        upDownVoteAnswer: answers.upDownVoteAnswer - 1,
+        downVoteAnswer: answers.downVoteAnswer - 1,
       }
     })
   }
@@ -99,7 +101,8 @@ const OneQuestion = props => {
           content={question.content}
           description={question.description}
           dateOfPost={question.dateOfPost}
-          upDownVoteQuestion={question.upDownVoteQuestion}
+          upVoteQuestion={question.upVoteQuestion}
+          downVoteQuestion={question.downVoteQuestion}
         />
         <button onClick={upVoteQuestion}>Upvote</button>
         <button onClick={downVoteQuestion}>Downvote</button>

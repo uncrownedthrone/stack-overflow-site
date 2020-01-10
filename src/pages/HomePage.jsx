@@ -3,7 +3,6 @@ import Question from './Question'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-
 const HomePage = () => {
   const [data, setData] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
@@ -45,7 +44,8 @@ const HomePage = () => {
                     description={question.description}
                     content={question.content}
                     dateOfPost={question.dateOfPost}
-                    upDownVoteQuestion={question.UpDownVoteQuestion}
+                    upVoteQuestion={question.upVoteQuestion}
+                    downVoteQuestion={question.downVoteQuestion}
                   />
                 </Link>
               </div>

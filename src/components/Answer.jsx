@@ -6,7 +6,10 @@ const Answer = props => {
       <div>
         <p>Answer Content: {props.answerContent}</p>
         <p>Date Answer Created: {props.dateOfPost}</p>
-        <p>Answer Votes: {props.upDownVoteAnswer}</p>
+        <div>
+          <span>Up Votes: {props.upVoteAnswer}</span>
+          <span>Down Votes: {props.downVoteAnswer}</span>
+        </div>
       </div>
     </>
   )

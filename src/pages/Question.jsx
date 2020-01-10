@@ -9,7 +9,8 @@ const Question = props => {
           <p>Question Content: {props.content}</p>
           <p>Date Question Created: {props.dateOfPost}</p>
           <div>
-            <span>Question Votes: {props.upDownVoteQuestion}</span>
+            <span>Up Votes: {props.upVoteQuestion}</span>
+            <span>Down Votes: {props.downVoteQuestion}</span>
           </div>
         </li>
       </ul>
