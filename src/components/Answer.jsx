@@ -3,12 +3,13 @@ import React from 'react'
 const Answer = props => {
   return (
     <>
-      <div>
-        <p>Answer Content: {props.answerContent}</p>
-        <p>Date Answer Created: {props.dateOfPost}</p>
+      <div className="answers">
+        <p>{props.answerContent}</p>
+        <p>Posted: {props.dateOfPost}</p>
         <div>
-          <span>Up Votes: {props.upVoteAnswer}</span>
-          <span>Down Votes: -{props.downVoteAnswer}</span>
+          <p>
+            Up Votes: {props.upVoteAnswer} | Down Votes: -{props.downVoteAnswer}
+          </p>
         </div>
       </div>
     </>

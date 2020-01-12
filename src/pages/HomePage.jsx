@@ -26,6 +26,23 @@ const HomePage = () => {
 
   return (
     <div>
+      {data.map((question, i) => {
+        return (
+          <div>
+            <div>
+              <Link to={`/question/${question.id}`}>
+                <Question
+                  description={question.description}
+                  content={question.content}
+                  dateOfPost={question.dateOfPost}
+                  upVoteQuestion={question.upVoteQuestion}
+                  downVoteQuestion={question.downVoteQuestion}
+                />
+              </Link>
+            </div>
+          </div>
+        )
+      })}
       <input
         type="search"
         placeholder="Search Questions"
@@ -33,28 +50,8 @@ const HomePage = () => {
         name="description"
         onChange={e => setSearchTerm(e.target.value)}
       ></input>
-      <button onClick={getSearchResults}>Getting Question</button>
+      <button onClick={getSearchResults}>Search</button>
       <button onClick={getData}>Clear Question</button>
-      <ul className="1">
-        {data.map((question, i) => {
-          return (
-            <div className="2" key={i}>
-              <div className="3">
-                <Link className="4" to={`/question/${question.id}`}>
-                  <Question
-                    className="5"
-                    description={question.description}
-                    content={question.content}
-                    dateOfPost={question.dateOfPost}
-                    upVoteQuestion={question.upVoteQuestion}
-                    downVoteQuestion={question.downVoteQuestion}
-                  />
-                </Link>
-              </div>
-            </div>
-          )
-        })}
-      </ul>
     </div>
   )
 }

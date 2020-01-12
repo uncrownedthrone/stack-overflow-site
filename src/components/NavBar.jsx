@@ -10,7 +10,7 @@ const NavBar = () => {
             Suncoast Overflow
           </Link>
           <Link className="nav" to="/createquestion">
-            Add A Question
+            Ask A New Question
           </Link>
         </nav>
       </div>

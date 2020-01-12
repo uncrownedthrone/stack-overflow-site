@@ -115,8 +115,12 @@ const OneQuestion = props => {
           upVoteQuestion={question.upVoteQuestion}
           downVoteQuestion={question.downVoteQuestion}
         />
-        <button onClick={clickUpVoteQuestion}>Upvote</button>
-        <button onClick={clickDownVoteQuestion}>Downvote</button>
+        <button className="upvote" onClick={clickUpVoteQuestion}>
+          Upvote
+        </button>
+        <button className="downvote" onClick={clickDownVoteQuestion}>
+          Downvote
+        </button>
       </div>
 
       {answers.length > 0 && (
@@ -133,10 +137,18 @@ const OneQuestion = props => {
                   />
                 </li>
                 <br />
-                <button value={answers.id} onClick={clickUpVoteAnswer}>
+                <button
+                  className="upvote"
+                  value={answers.id}
+                  onClick={clickUpVoteAnswer}
+                >
                   Upvote
                 </button>
-                <button value={answers.id} onClick={clickDownVoteAnswer}>
+                <button
+                  className="downvote"
+                  value={answers.id}
+                  onClick={clickDownVoteAnswer}
+                >
                   Downvote
                 </button>
               </>
